@@ -20,12 +20,10 @@ CREATE FUNCTION AnimalsInParis()
 RETURNS VARCHAR(255) READS SQL DATA
 BEGIN
     DECLARE animalList VARCHAR(255);
-
     SELECT GROUP_CONCAT(animal_name) INTO animalList
     FROM animals
     WHERE shelter_ID = (SELECT shelter_ID FROM shelters WHERE shelter_city = 'Paris');
     -- 'Paris'; -- Replace 'Paris' with the actual identifier for the Paris shelter
-
     RETURN animalList;
 END //
 DELIMITER ;
