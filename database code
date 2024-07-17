@@ -1,0 +1,282 @@
+drop database pet_shelters;
+create database pet_shelters;
+use pet_shelters;
+
+CREATE TABLE shelters (
+    shelter_ID INTEGER PRIMARY KEY NOT NULL,
+    shelter_city VARCHAR(20)
+);
+
+INSERT INTO SHELTERS
+(shelter_ID, shelter_city)
+VALUES
+(1, 'Berlin'),
+(2, 'Dortmund'),
+(3, 'Frankfurt am Main'),
+(4, 'Munich'),
+(5, 'Vienna'),
+(6, 'Gratz'),
+(7, 'Prague'),
+(8, 'Salzburg'),
+(9, 'Paris');
+
+select * from shelters;
+
+CREATE TABLE animals (
+    animal_ID INTEGER NOT NULL,
+    animal_name VARCHAR(20),
+    animal_species VARCHAR(20),
+    animal_age DECIMAL(3,1),
+    animal_colour VARCHAR(20),
+    animal_health_scale INTEGER,
+    shelter_ID INTEGER NOT NULL,
+    PRIMARY KEY ( animal_ID),
+    FOREIGN KEY ( shelter_ID) REFERENCES shelters (Shelter_ID)
+);
+ 
+INSERT INTO animals (
+animal_ID,  animal_name, animal_species, animal_age, animal_colour, animal_health_scale, Shelter_ID)
+Values
+( 2314 , 'Angel', 'Dog', 10, 'grey' , 3, 5 ),
+( 2280 , 'Cutie', 'Hamster', 1, 'pale brown' , 3, 9 ),
+( 2771 , 'Yoda', 'cat', 3, 'grey' , 1, 2 ),
+( 1510 , 'Bambi', 'rabbit', 2, 'white' , 1, 5 ),
+( 2894 , 'Inky', 'guinea pig', 2, 'brown' , 3, 4 ),
+( 2693 , 'Chie', 'turtle', 10, 'greenblack' , 1, 2 ),
+( 2917 , 'Cuba', 'dog', 0.5, 'bw' , 2, 8 ),
+( 2104 , 'Cuddles', 'dog', 1, 'bw' , 2, 4 ),
+( 2635 , 'Daisy', 'dog', 6, 'white' , 1, 6 ),
+( 1548 , 'Diamond', 'cat', 3, 'stripes' , 2, 1 ),
+( 2217 , 'Fleur', 'cat', 10, 'clack' , 3, 1 ),
+( 1348 , 'Flower', 'cat', 7, 'grey&white', 1, 7 ),
+( 1487 , 'Fluffy', 'rabbit', 5, 'grey' , 1, 9 ),
+( 1041 , 'Gio', 'guinea pig', 1, 'dark brown' , 2, 9 ),
+( 2251 , 'Jelly Bean', 'Dog', 1, 'blackbrown', 2, 3 ),
+( 2659 , 'Jesse', 'Hamster', 1, 'white', 2, 2 ),
+( 1547 , 'Lilly', 'cat', 2, 'dark grey', 3, 8 ),
+( 2936 , 'Lola', 'rabbit', 4, 'grey', 1, 6 ),
+( 1651 , 'ghost', 'guinea pig', 2, 'brown', 2, 9 ),
+( 2878 , 'Pansy', 'turtle', 20, 'greenblack' , 1, 9 ),
+( 2669 , 'Princess', 'dog', 2, 'chocolate' , 3, 9 ),
+( 2965 , 'Shawn', 'dog', 0.5, 'grey' , 1, 2 ),
+( 1134 , 'Tutu', 'dog', 0.5, 'golden' , 1, 4 ),
+( 2545 , 'snowy', 'cat', 0.5, 'white' , 1, 4 ),
+( 2962 , 'Cujo', 'cat', 7, 'ginger',3, 5 ),
+( 2018 , 'Manga', 'cat', 1, 'greyblack' , 5, 7 ),
+( 2862 , 'Chibi', 'rabbit', 1, 'grey' , 2, 1 ),
+( 1843 , 'Panda', 'guinea pig', 1, 'bw' , 1, 7 ),
+( 2829 , 'Coco', 'cat', 1.5, 'bw' , 1, 3 ),
+( 2520 , 'Mocha', 'cat', 2, 'brown',1, 7 );
+
+select * from animals;
+
+CREATE TABLE employees (
+    employee_ID INTEGER PRIMARY KEY NOT NULL,
+    employee_firstname VARCHAR(20),
+    employee_lastname VARCHAR(20),
+    shelter_ID INTEGER,
+    FOREIGN KEY (shelter_ID) REFERENCES shelters(shelter_ID)
+);
+
+Insert INTO employees
+(employee_ID, employee_firstname,employee_lastname, shelter_ID)
+Values
+( 1 , 'Robert' , 'Upchurch' , 7),
+( 2 , 'Alice' , 'Rogers' , 5),
+( 3 , 'Anne' , 'Zanettini' , 4),
+( 4 , 'Bartolomeo' , 'Cambel' , 3),
+( 5 , 'Martin' , 'Pund' , 3),
+( 6 , 'Emmy' , 'Tilberry' , 1),
+( 7 , 'Linda' , 'Jones' , 2),
+( 8 , 'Jonas' , 'Peters' , 9),
+( 9 , 'Charles' , 'Umbers' , 8),
+( 10 , 'Merlin' , 'Kepler' , 6),
+( 11 , 'Raul' , 'Novak' , 2),
+( 12 , 'Hannah' , 'Chadwick' , 5),
+( 13 , 'Jane' , 'Heller' , 1),
+( 14 , 'Alice' , 'Mann' , 4),
+( 15 , 'Maurice' , 'Dumas' , 6),
+( 16 , 'Roman' , 'Brave' , 7),
+( 17 , 'Adam' , 'Colin' , 9),
+( 18 , 'Bertie' , 'Cloud' , 8);
+
+select * from employees;
+
+CREATE TABLE adopters (
+    adopter_ID VARCHAR(7) PRIMARY KEY NOT NULL,
+    adopter_firstname VARCHAR(20),
+    adopter_lastname VARCHAR(20),
+    adopter_city VARCHAR(20),
+	animal_ID INTEGER NOT NULL,
+	FOREIGN KEY (animal_ID) REFERENCES animals(animal_ID)
+);
+
+INSERT INTO adopters 
+(adopter_ID, adopter_firstname, adopter_lastname, adopter_city, animal_ID)
+Values
+( ' 1LJ' , ' Laura ', ' Jackson ', ' Berlin ',  2314),
+( ' 2PR' , ' Peter ', ' Robinson ', ' Dortmund ',  2280),
+( ' 3RR' , ' Rim ', ' Redmane ', ' Frankfurt am Main ',  2771),
+( ' 4LG' , ' Lina ', ' Gopher ', ' Munich ',  1510),
+( ' 5NR' , ' Nathan ', ' Roberts ', ' Vienna ',  2894),
+( ' 6MC' , ' Monica ', ' Coolio ', ' Gratz ',  2693),
+( ' 7BB' , ' Bernard ', ' Blessed ', ' Prague ',  2917),
+( ' 8PB' , ' Peter ', ' Brown ', ' Salzburg ',  2104),
+( ' 9SW' , ' Stanley ', ' White ', ' Paris ',  2635),
+( ' 10AMB' , ' Anna Marie ', ' Black ', ' Berlin ',  1548),
+( ' 11PW' , ' Paul ', ' Warsaw ', ' Dortmund ',  2217),
+( ' 12ZL' , ' Zoe ', ' Laurie ', ' Frankfurt am Main ',  1348),
+( ' 13VM' , ' Vivian ', ' Mercury ', ' Munich ',  1487),
+( ' 14JS' , ' Jean ', ' Swan ', ' Vienna ',  1041),
+( ' 15JP' , ' Jack ', ' Peterson ', ' Gratz ',  2251),
+( ' 16GK' , ' Gerry ', ' Kolben ', ' Prague ',  2659),
+( ' 17NG' , ' Nora ', ' Gaultier ', ' Salzburg ',  1547),
+( ' 18NE' , ' Nadine ', ' Erben ', ' Paris ',  2936),
+( ' 19AK' , ' Aaron ', ' Kandinski ', ' Berlin ',  1651),
+( ' 20RC' , ' Rachel ', ' Cole ', ' Dortmund ',  2878),
+( ' 21PC' , ' Priscilla ', ' Crowley ', ' Frankfurt am Main ',  2669),
+( ' 22DC' , ' Daniel ', ' Chendos ', ' Munich ',  2965),
+( ' 23JS' , ' Jack ', ' Smith ', ' Vienna ',  1134),
+( ' 24BJ' , ' Barry ', ' Jackson ', ' Gratz ',  2545),
+( ' 25MB' , ' Michael ', ' Bower ', ' Prague ',  2962),
+( ' 26SA' , ' Susan ', ' Altman ', ' Salzburg ',  2018),
+( ' 27SH' , ' Sarah  ', ' Harmond ', ' Paris ',  2862),
+( ' 28SA' , ' Sam ', ' Aram ', ' Prague ',  1843),
+( ' 29NG' , ' Noah  ', ' Green ', ' Berlin ',  2829),
+( ' 30KR' , ' Katie ', ' Roberts ', ' Munich ',  2520);
+
+select * from adopters;
+
+CREATE TABLE Health (
+    ID_vet_visit INTEGER PRIMARY KEY NOT NULL,
+    animal_ID INTEGER,
+    health_scale INTEGER,
+    lastvisit DATE,
+    diagnosis VARCHAR(30),
+    therapy VARCHAR(30),
+    FOREIGN KEY (animal_ID) REFERENCES animals(animal_ID)
+    );
+
+
+    insert into Health
+    ( ID_vet_visit, animal_ID, health_scale, lastvisit, diagnosis, therapy)
+    Values
+	 (10, 2280, 3, '2023-12-20','overweight','vegetables only'),
+	 (11 , 2771 , 1, '2023-11-22', 'healthy', 'no therapy needed ' ),
+	 (12 , 1510 , 1, '2023-01-12', 'healthy', 'no therapy needed ' ),
+	 (13 , 2314 , 3, '2023-12-20', 'age-related issues', 'light food only '),
+	 (14 , 2894 , 3, '2023-12-10', 'diabetes', 'no sweet ' ),
+	 (15 , 2693 , 1, '2023-12-22', 'healthy', 'no therapy needed ' ),
+	 (16 , 2917 , 2, '2023-12-23', 'tonsilities ', 'antibiotics ' ),
+	 (17 , 2104 , 1, '2023-10-24', 'healthy', 'no therapy needed ' ),
+	 (18 , 2635 , 1, '2023-09-25', 'healthy', ' no therapy needed ' ),
+	 (19 , 1548 , 2, '2023-11-14', 'broken tooth ', ' dentistry ' ),
+	 (20 , 2217 , 3, '2023-12-15', 'age-related issues ', ' light food only ' ),
+	 (21 , 1348 , 1, '2023-12-31', 'healthy', ' no therapy needed ' ),
+	 (22, 1487 , 1, '2024-01-02', 'healthy', ' no therapy needed ' ),
+	 (23 , 1041 , 2, '2023-10-05', 'overweight', ' exercise' ),
+	 (24 , 2251 , 2, '2023-11-06', 'epilepsy', ' medicine prescription' ),
+	 (25 , 2659 , 1, '2023-12-03', 'healthy', ' no therapy needed' ),
+	 (26 , 1547 , 3, '2023-12-08', 'broken nail', 'removal' ),
+	 (27 , 2936 , 1, '2024-01-03', 'healthy', ' no therapy needed' ),
+	 (28, 1651 , 2, '2024-01-03', 'overweight', ' exercise' ),
+	 (29 , 2878 , 1, '2023-12-12', 'healthy', ' no therapy needed' ),
+	 (30 , 2669 , 3, '2023-09-25', 'overweight', ' exercise and diet food' ),
+	 (31 , 2965 , 1, '2023-09-30', 'healthy', ' no therapy needed ' ),
+	 (32 , 1134 , 1, '2023-09-15', 'healthy', ' no therapy needed ' ),
+	 (33 , 2545 , 1, '2023-10-07', 'healthy', ' no therapy needed ' ),
+	 (34 , 2962 , 3, '2023-10-02', 'artritis', ' medicine prescription' ),
+	 (35 , 2018 , 5, '2023-11-11', 'exzema', ' medicine prescription' ),
+	 (36 , 2862 , 2, '2023-11-03', 'broken leg ', ' plaster and follow up' ),
+	 (37 , 1843 , 1, '2023-12-04', 'healthy', ' no therapy needed' ),
+	 (38 , 2829 , 1, '2023-12-19', 'healthy', ' no therapy needed' ),
+	 (39 , 2520 , 1, '2023-12-12', 'healthy', ' no therapy needed' )
+;
+    
+    select* from health;
+    
+ -- Creating a joined table that allows us to connect which animal was adopted by who
+-- with subquery of showing only dogs above the age of 5
+	SELECT
+	an.animal_ID,
+	an.animal_species,
+	an.animal_age,
+	ad.adopter_firstname,
+	ad.adopter_lastname,
+	ad.adopter_city
+	from animals an
+	left join
+	adopters ad
+	on an. animal_ID = ad.animal_ID
+	WHERE
+	an.animal_age >5
+	and an.animal_species = 'dog'
+	;
+    
+-- query to see how many days since last vet-visit
+	select 
+    health.ID_vet_visit, health.lastvisit, health.animal_ID,
+    DATEDIFF(health.lastvisit, current_DATE) AS days_since_visit
+    from health
+	;
+
+-- procedure to see who needs to be contacted for a follow-up meeting...all those with over 30  days since last appointment 
+DELIMITER //
+CREATE PROCEDURE next_visit_info()
+BEGIN
+     SELECT
+        ad.adopter_ID,
+        an.animal_name,
+        an.animal_species,
+        an.animal_age,
+       --  ad.adopter_firstname,
+      --   ad.adopter_lastname,
+		h.diagnosis,
+        h.lastvisit,
+        DATEDIFF(current_date(), h.lastvisit) AS days_since_last_visit,
+        
+        CASE
+			WHEN h.diagnosis = "healthy"  
+            THEN 'No follow-up needed'
+            WHEN
+             DATEDIFF(current_date(), h.lastvisit) > 30
+            THEN 
+             'Call to make appointment'
+            ELSE 'Too early for a visit'
+        END AS visit_message
+    FROM
+        animals an
+    LEFT JOIN
+        adopters ad ON an.animal_ID = ad.animal_ID
+    LEFT JOIN
+        health h ON an.animal_ID = h.animal_ID
+	-- WHERE
+	-- an.animal_species = 'dog'
+  ;
+END;
+// DELIMITER ;
+
+-- calling procedure
+CALL next_visit_info();
+
+
+-- In your database, create a stored function that can be applied to a query in your DB  
+
+-- Which animals are at the Paris shelter? 
+DELIMITER //
+CREATE FUNCTION AnimalsInParis()
+RETURNS VARCHAR(255) READS SQL DATA
+BEGIN
+    DECLARE animalList VARCHAR(255);
+
+    SELECT GROUP_CONCAT(animal_name) INTO animalList
+    FROM animals
+    WHERE shelter_ID = (SELECT shelter_ID FROM shelters WHERE shelter_city = 'Paris');
+    -- 'Paris'; -- Replace 'Paris' with the actual identifier for the Paris shelter
+
+    RETURN animalList;
+END //
+DELIMITER ;
+
+
+SELECT AnimalsInParis(); 
