@@ -15,6 +15,7 @@ In the script there are examples of using different functions
 such as the following:
 
 -- Which animals are at the Paris shelter? 
+```
 DELIMITER //
 CREATE FUNCTION AnimalsInParis()
 RETURNS VARCHAR(255) READS SQL DATA
@@ -25,8 +26,10 @@ BEGIN
     WHERE shelter_ID = (SELECT shelter_ID FROM shelters WHERE shelter_city = 'Paris');
     -- 'Paris'; -- Replace 'Paris' with the actual identifier for the Paris shelter
     RETURN animalList;
-END //
+END 
+//
 DELIMITER ;
+```
 
 
 
